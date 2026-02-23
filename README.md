@@ -1,70 +1,208 @@
-# Getting Started with Create React App
+# PCC - Pad Construction Consult and Services
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Building Excellence, Designing Dreams
 
-## Available Scripts
+A modern, responsive website for Pad Construction Consult and Services (PCC), a registered architecture and construction firm in Nigeria. Built with React and Tailwind CSS.
 
-In the project directory, you can run:
+![PCC Website](https://img.shields.io/badge/React-18.x-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38bdf8) ![License](https://img.shields.io/badge/license-MIT-green)
 
-### `npm start`
+## 🌟 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Responsive Design**: Fully optimized for mobile, tablet, and desktop devices
+- **Interactive Portfolio**: Filterable project gallery with before/after sliders
+- **Dynamic Animations**: Smooth transitions and typing effects
+- **Video Integration**: Embedded project videos showcasing construction work
+- **Contact Form**: Validated form with real-time error handling
+- **SEO Optimized**: Meta tags and semantic HTML for better search visibility
+- **PWA Ready**: Manifest file for progressive web app capabilities
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🏗️ Project Structure
 
-### `npm test`
+```
+pcc/
+├── public/
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── index.html
+├── src/
+│   ├── assets/
+│   │   ├── certification/
+│   │   ├── constructions/
+│   │   ├── designs/
+│   │   ├── logos/
+│   │   └── profile-images/
+│   ├── components/
+│   │   ├── header/
+│   │   │   └── header.jsx
+│   │   └── footer/
+│   │       └── footer.jsx
+│   ├── pages/
+│   │   ├── home/
+│   │   │   └── home.jsx
+│   │   ├── project/
+│   │   │   └── project.jsx
+│   │   └── contact/
+│   │       └── Contact.jsx
+│   ├── App.js
+│   ├── index.js
+│   └── index.css
+├── package.json
+└── README.md
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Getting Started
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js (v14 or higher)
+- npm or yarn
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/pcc-website.git
+cd pcc-website
+```
 
-### `npm run eject`
+2. Install dependencies
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Start the development server
+```bash
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📦 Build for Production
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm run build
+```
 
-## Learn More
+This creates an optimized production build in the `build` folder.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🎨 Design System
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Color Palette
 
-### Code Splitting
+- **Gold**: `#FFD700` / `#D4AF37` - Primary accent color
+- **Black**: `#000000` - Primary text and backgrounds
+- **White**: `#FFFFFF` - Secondary backgrounds and text
+- **Light Grey**: `#F8F8F8` - Section backgrounds
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Typography
 
-### Analyzing the Bundle Size
+- Font Family: System fonts (sans-serif)
+- Responsive text sizing using Tailwind utilities
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📄 Pages
 
-### Making a Progressive Web App
+### Home (`/`)
+- Hero section with call-to-action buttons
+- About section with company information
+- Services showcase
+- Project highlights with sliding animations
+- CEO profile
+- Client testimonials
+- Contact CTA
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Projects (`/project`)
+- Filterable portfolio grid (2-7 Bedroom, Duplex, Shopping Mall, Hostel, Completed)
+- Interactive project cards with hover effects
+- Project detail modal with:
+  - Before/After slider
+  - Project description
+  - Location information
+  - Embedded video player
 
-### Advanced Configuration
+### Contact (`/contact`)
+- Contact form with validation
+- Animated typing address display
+- Google Maps integration
+- Social media links
+- WhatsApp floating button
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🛠️ Technologies Used
 
-### Deployment
+- **React** - UI library
+- **React Router** - Client-side routing
+- **Tailwind CSS** - Utility-first CSS framework
+- **Lucide React** - Icon library
+- **Sharp** - Image optimization (Node.js)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📱 Responsive Breakpoints
 
-### `npm run build` fails to minify
+- Mobile: `320px+`
+- Tablet: `768px+`
+- Desktop: `1024px+`
+- Large Desktop: `1280px+`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🎯 Key Features Implementation
+
+### Image Optimization
+Images are optimized using Sharp for different resolutions:
+```bash
+node optimize-media.js
+```
+
+### Logo Generation
+Generate PWA logos from source image:
+```bash
+node generate-logos.js
+```
+
+## 🔧 Configuration Files
+
+### `tailwind.config.js`
+Custom Tailwind configuration with project-specific colors and utilities.
+
+### `manifest.json`
+PWA manifest for installable web app experience.
+
+## 📈 Performance Optimizations
+
+- Lazy loading for images
+- Code splitting with React Router
+- Optimized image formats and sizes
+- Minimal bundle size with tree shaking
+- CSS purging in production
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
+## 👥 Team
+
+**Pad Construction Consult and Services**
+- CEO: Preslyn Ayere
+- Email: mpreslyn@gmail.com
+- Phone: +234 818 142 3564 / +234 805 138 9860
+
+## 🌐 Locations
+
+- Lagos, Nigeria
+- Port Harcourt, Nigeria
+- Asaba, Nigeria
+
+## 📞 Support
+
+For support, email mpreslyn@gmail.com or call +234 818 142 3564.
+
+---
+
+**Built with ❤️ by PCC Team**

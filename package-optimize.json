@@ -1,0 +1,12 @@
+{
+  "name": "media-optimizer",
+  "version": "1.0.0",
+  "scripts": {
+    "optimize": "node optimize-media.js"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0"
+  }
+}
