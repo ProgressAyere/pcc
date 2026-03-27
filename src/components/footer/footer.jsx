@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Instagram, Facebook, ArrowUp } from 'lucide-react';
+import { FaTiktok } from 'react-icons/fa';
 import logo2 from '../../assets/logos/logo2.jpeg';
 
 const Footer = () => {
@@ -90,18 +91,14 @@ const Footer = () => {
                 <li className="text-sm leading-relaxed">123 Construction Avenue, Lagos, Nigeria</li>
               </ul>
               <div className="flex space-x-4">
-                <a href="/" className="text-[#D4AF37] transition-colors duration-300 ease-in-out hover:text-white">
+                <a href="https://www.instagram.com/ph_construction_architect?utm_source=qr&igsh=aTFsc21uemdnNnE3" className="text-[#D4AF37] transition-colors duration-300 ease-in-out hover:text-white">
                   <Instagram size={20} />
                 </a>
-                <a href="/" className="text-[#D4AF37] transition-colors duration-300 ease-in-out hover:text-white">
+                <a href="https://www.facebook.com/share/1BzJsEuAWR/" className="text-[#D4AF37] transition-colors duration-300 ease-in-out hover:text-white">
                   <Facebook size={20} />
                 </a>
-                <a href="/" className="text-[#D4AF37] transition-colors duration-300 ease-in-out hover:text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M9 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                    <path d="M13 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                    <path d="M12 21a9 9 0 1 1 0 -18a9 9 0 0 1 0 18z" />
-                  </svg>
+                <a href="https://www.tiktok.com/@pad_construction_consult?_r=1&_t=ZS-9423Jr967vh" className="text-[#D4AF37] transition-colors duration-300 ease-in-out hover:text-white">
+                  <FaTiktok size={20} />
                 </a>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, Facebook, Instagram, ArrowUp, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Instagram, MessageCircle } from 'lucide-react';
+import { FaTiktok } from 'react-icons/fa';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -188,14 +189,14 @@ const Contact = () => {
             <div className="mb-8">
               <p className="font-semibold text-white mb-3">Follow Us</p>
               <div className="flex space-x-4">
-                <a href="/" className="text-[#D4AF37] hover:text-white transition-colors duration-300">
+                <a href="https://www.facebook.com/share/1BzJsEuAWR/" className="text-[#D4AF37] hover:text-white transition-colors duration-300">
                   <Facebook size={24} />
                 </a>
-                <a href="/" className="text-[#D4AF37] hover:text-white transition-colors duration-300">
+                <a href="https://www.instagram.com/ph_construction_architect?utm_source=qr&igsh=aTFsc21uemdnNnE3" className="text-[#D4AF37] hover:text-white transition-colors duration-300">
                   <Instagram size={24} />
                 </a>
-                <a href="/" className="text-[#D4AF37] hover:text-white transition-colors duration-300">
-                  <ArrowUp size={24} />
+                <a href="https://www.tiktok.com/@pad_construction_consult?_r=1&_t=ZS-9423Jr967vh" className="text-[#D4AF37] hover:text-white transition-colors duration-300">
+                  <FaTiktok size={24} />
                 </a>
               </div>
             </div>
