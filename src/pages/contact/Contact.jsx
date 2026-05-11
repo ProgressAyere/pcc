@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Phone, Mail, MapPin, Facebook, Instagram, MessageCircle } from 'lucide-react';
 import { FaTiktok } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
+import { EMAILJS_CONFIG, WHATSAPP_CONFIG } from '../../config/emailConfig';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +16,8 @@ const Contact = () => {
   const [typedText, setTypedText] = useState('');
   const [addressIndex, setAddressIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
 
   useEffect(() => {
     const addresses = ['Lagos, Nigeria', 'Port-Harcourt, Nigeria', 'Asaba, Nigeria'];
@@ -54,13 +58,58 @@ const Contact = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const sendToWhatsApp = (data) => {
+    const message = `*New Project Inquiry from PCC Website*%0A%0A*Name:* ${data.fullName}%0A*Phone:* ${data.phone}%0A*Email:* ${data.email}%0A*Project Type:* ${data.projectType}%0A*Message:* ${data.message}`;
+    const whatsappUrl = `https://wa.me/${WHATSAPP_CONFIG.PHONE_NUMBER}?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = validateForm();
+    
     if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted:', formData);
-      alert('Thank you! We will contact you soon.');
-      setFormData({ fullName: '', phone: '', email: '', projectType: '', message: '' });
+      setIsSubmitting(true);
+      setSubmitStatus({ type: '', message: '' });
+
+      try {
+        // Send email via EmailJS
+        const templateParams = {
+          from_name: formData.fullName,
+          from_email: formData.email,
+          phone: formData.phone,
+          project_type: formData.projectType,
+          message: formData.message,
+          to_email: 'mpreslyn@gmail.com',
+        };
+
+        await emailjs.send(
+          EMAILJS_CONFIG.SERVICE_ID,
+          EMAILJS_CONFIG.TEMPLATE_ID,
+          templateParams,
+          EMAILJS_CONFIG.PUBLIC_KEY
+        );
+
+        // Send to WhatsApp
+        sendToWhatsApp(formData);
+
+        // Success notification
+        setSubmitStatus({
+          type: 'success',
+          message: 'Thank you! Your message has been sent successfully. We will contact you soon.'
+        });
+
+        // Reset form
+        setFormData({ fullName: '', phone: '', email: '', projectType: '', message: '' });
+      } catch (error) {
+        console.error('Error sending message:', error);
+        setSubmitStatus({
+          type: 'error',
+          message: 'Failed to send message. Please try again or contact us directly via WhatsApp.'
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
     } else {
       setErrors(newErrors);
     }
@@ -80,6 +129,18 @@ const Contact = () => {
           {/* Left Column: Contact Form */}
           <div>
             <h2 className="text-2xl font-bold text-white mb-6">Send Us a Message</h2>
+            
+            {/* Success/Error Notification */}
+            {submitStatus.message && (
+              <div className={`mb-6 p-4 rounded ${
+                submitStatus.type === 'success' 
+                  ? 'bg-green-900 border border-green-500 text-green-100' 
+                  : 'bg-red-900 border border-red-500 text-red-100'
+              }`}>
+                {submitStatus.message}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <input
@@ -148,9 +209,12 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full bg-[#D4AF37] text-black py-3 font-semibold transition-all duration-300 hover:bg-black hover:text-[#D4AF37]"
+                disabled={isSubmitting}
+                className={`w-full bg-[#D4AF37] text-black py-3 font-semibold transition-all duration-300 hover:bg-black hover:text-[#D4AF37] ${
+                  isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               >
-                Submit
+                {isSubmitting ? 'Sending...' : 'Submit'}
               </button>
             </form>
           </div>
