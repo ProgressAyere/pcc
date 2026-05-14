@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Award, Handshake, Lightbulb, Smile, Ruler, Building2, HardHat, Wrench, Briefcase, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { HomeSkeleton } from '../../components/skeleton/Skeleton';
 import heroImage from '../../assets/constructions/construction (1).jpeg';
 import certImage from '../../assets/certification/certificate.png';
 import ceoImage from '../../assets/profile-images/profile1.jpeg';
@@ -48,6 +50,14 @@ const ProjectCard = ({ projects }) => {
 
 const Home = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <HomeSkeleton />;
   const projectSets = [
     [
       {
@@ -168,7 +178,7 @@ const Home = () => {
       </section>
 
       {/* Services Section */}
-      <section className="bg-[#F8F8F8] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+      <section id="services" className="bg-[#F8F8F8] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 text-center">
             Our Services
@@ -176,45 +186,80 @@ const Home = () => {
           <div className="w-24 h-1 bg-[#FFD700] mx-auto mb-8 sm:mb-12"></div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md hover:bg-black hover:text-white transition-all duration-300 group">
+            <motion.div 
+              id="service-architectural-design" 
+              className="bg-white p-6 sm:p-8 rounded-lg shadow-md hover:bg-black hover:text-white transition-all duration-300 group scroll-mt-24"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0 }}
+            >
               <Ruler className="text-[#FFD700] w-14 h-14 mb-4" />
               <h3 className="text-black group-hover:text-white text-xl sm:text-2xl font-semibold mb-3">Architectural Design</h3>
               <p className="text-black group-hover:text-white text-sm sm:text-base">
                 Innovative and functional designs tailored to your needs and budget.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md hover:bg-black hover:text-white transition-all duration-300 group">
+            <motion.div 
+              id="service-construction" 
+              className="bg-white p-6 sm:p-8 rounded-lg shadow-md hover:bg-black hover:text-white transition-all duration-300 group scroll-mt-24"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
               <Building2 className="text-[#FFD700] w-14 h-14 mb-4" />
               <h3 className="text-black group-hover:text-white text-xl sm:text-2xl font-semibold mb-3">Building Construction</h3>
               <p className="text-black group-hover:text-white text-sm sm:text-base">
                 Quality construction services from foundation to finishing.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md hover:bg-black hover:text-white transition-all duration-300 group">
+            <motion.div 
+              id="service-supervision" 
+              className="bg-white p-6 sm:p-8 rounded-lg shadow-md hover:bg-black hover:text-white transition-all duration-300 group scroll-mt-24"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               <HardHat className="text-[#FFD700] w-14 h-14 mb-4" />
               <h3 className="text-black group-hover:text-white text-xl sm:text-2xl font-semibold mb-3">Project Supervision</h3>
               <p className="text-black group-hover:text-white text-sm sm:text-base">
                 Expert oversight ensuring projects meet standards and timelines.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md hover:bg-black hover:text-white transition-all duration-300 group">
+            <motion.div 
+              id="service-renovation" 
+              className="bg-white p-6 sm:p-8 rounded-lg shadow-md hover:bg-black hover:text-white transition-all duration-300 group scroll-mt-24"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
               <Wrench className="text-[#FFD700] w-14 h-14 mb-4" />
               <h3 className="text-black group-hover:text-white text-xl sm:text-2xl font-semibold mb-3">Renovation Services</h3>
               <p className="text-black group-hover:text-white text-sm sm:text-base">
                 Transform existing spaces with modern upgrades and improvements.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md hover:bg-black hover:text-white transition-all duration-300 group">
+            <motion.div 
+              id="service-consultancy" 
+              className="bg-white p-6 sm:p-8 rounded-lg shadow-md hover:bg-black hover:text-white transition-all duration-300 group scroll-mt-24"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
               <Briefcase className="text-[#FFD700] w-14 h-14 mb-4" />
               <h3 className="text-black group-hover:text-white text-xl sm:text-2xl font-semibold mb-3">Construction Consultancy</h3>
               <p className="text-black group-hover:text-white text-sm sm:text-base">
                 Professional advice and guidance for all construction needs.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -253,7 +298,13 @@ const Home = () => {
           <div className="w-24 h-1 bg-[#FFD700] mx-auto mb-8 sm:mb-12"></div>
 
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center mb-12">
-            <div className="order-2 md:order-1">
+            <motion.div 
+              className="order-2 md:order-1"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+            >
               <h3 className="text-white text-2xl sm:text-3xl font-bold mb-2">Preslyn Ayere</h3>
               <p className="text-[#FFD700] text-lg sm:text-xl mb-6">CEO & Lead Architect</p>
               <p className="text-white text-base sm:text-lg leading-relaxed mb-6">
@@ -265,15 +316,21 @@ const Home = () => {
               <blockquote className="text-[#FFD700] text-lg sm:text-xl italic border-l-4 border-[#FFD700] pl-4">
                 "We don't just build structures; we create spaces where dreams come alive and memories are made."
               </blockquote>
-            </div>
-            <div className="order-1 md:order-2">
+            </motion.div>
+            <motion.div 
+              className="order-1 md:order-2"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+            >
               <img 
                 src={ceoImage} 
                 alt="Preslyn Ayere - CEO of PCC" 
                 className="w-full h-auto rounded-lg shadow-2xl"
                 loading="lazy"
               />
-            </div>
+            </motion.div>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
@@ -302,7 +359,13 @@ const Home = () => {
           <div className="w-24 h-1 bg-[#FFD700] mx-auto mb-8 sm:mb-12"></div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md">
+            <motion.div 
+              className="bg-white p-6 sm:p-8 rounded-lg shadow-md"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0 }}
+            >
               <div className="flex gap-1 mb-4">
                 <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
                 <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
@@ -314,9 +377,15 @@ const Home = () => {
                 "PCC delivered beyond our expectations. The attention to detail and professionalism was outstanding."
               </p>
               <p className="text-black font-semibold">- Mr. Johnson O.</p>
-            </div>
+            </motion.div>
 
-            <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md">
+            <motion.div 
+              className="bg-white p-6 sm:p-8 rounded-lg shadow-md"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               <div className="flex gap-1 mb-4">
                 <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
                 <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
@@ -328,9 +397,15 @@ const Home = () => {
                 "From design to completion, PCC made our dream home a reality. Highly recommended!"
               </p>
               <p className="text-black font-semibold">- Mrs. Adeyemi T.</p>
-            </div>
+            </motion.div>
 
-            <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md">
+            <motion.div 
+              className="bg-white p-6 sm:p-8 rounded-lg shadow-md"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
               <div className="flex gap-1 mb-4">
                 <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
                 <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
@@ -342,7 +417,7 @@ const Home = () => {
                 "Excellent service, quality work, and timely delivery. PCC is the best in the business."
               </p>
               <p className="text-black font-semibold">- Chief Okonkwo P.</p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

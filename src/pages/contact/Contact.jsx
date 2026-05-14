@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Phone, Mail, MapPin, Facebook, Instagram, MessageCircle } from 'lucide-react';
 import { FaTiktok } from 'react-icons/fa';
+import { ContactSkeleton } from '../../components/skeleton/Skeleton';
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG, WHATSAPP_CONFIG } from '../../config/emailConfig';
 
 const Contact = () => {
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
@@ -18,6 +20,11 @@ const Contact = () => {
   const [charIndex, setCharIndex] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const addresses = ['Lagos, Nigeria', 'Port-Harcourt, Nigeria', 'Asaba, Nigeria'];
@@ -38,6 +45,8 @@ const Contact = () => {
       return () => clearTimeout(timeout);
     }
   }, [charIndex, addressIndex]);
+
+  if (loading) return <ContactSkeleton />;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

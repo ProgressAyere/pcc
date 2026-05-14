@@ -1,12 +1,34 @@
 import { useState, useEffect, useRef } from 'react';
 import { Instagram, Facebook, ArrowUp } from 'lucide-react';
 import { FaTiktok } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import logo2 from '../../assets/logos/logo2.jpeg';
 
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const footerRef = useRef(null);
+  const navigate = useNavigate();
+
+  const handleServiceClick = (e, service) => {
+    e.preventDefault();
+    const serviceMap = {
+      'Architectural Design': 'service-architectural-design',
+      'Construction': 'service-construction',
+      'Supervision': 'service-supervision',
+      'Renovation': 'service-renovation',
+      'Consultancy': 'service-consultancy'
+    };
+    
+    navigate('/');
+    setTimeout(() => {
+      const serviceId = serviceMap[service];
+      const serviceElement = document.getElementById(serviceId);
+      if (serviceElement) {
+        serviceElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
+  };
 
   useEffect(() => {
     const currentFooter = footerRef.current;
@@ -56,12 +78,12 @@ const Footer = () => {
               <h3 className="text-[#D4AF37] font-semibold mb-4 tracking-wide">Quick Links</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="#projects" className="text-sm transition-colors duration-300 ease-in-out hover:text-[#D4AF37]">
+                  <a href="/project" className="text-sm transition-colors duration-300 ease-in-out hover:text-[#D4AF37]">
                     Projects
                   </a>
                 </li>
                 <li>
-                  <a href="#contact" className="text-sm transition-colors duration-300 ease-in-out hover:text-[#D4AF37]">
+                  <a href="/contact" className="text-sm transition-colors duration-300 ease-in-out hover:text-[#D4AF37]">
                     Contact
                   </a>
                 </li>
@@ -74,7 +96,7 @@ const Footer = () => {
               <ul className="space-y-3">
                 {['Architectural Design', 'Construction', 'Supervision', 'Renovation', 'Consultancy'].map((service) => (
                   <li key={service}>
-                    <a href="#services" className="text-sm transition-colors duration-300 ease-in-out hover:text-[#D4AF37]">
+                    <a href="#services" onClick={(e) => handleServiceClick(e, service)} className="text-sm transition-colors duration-300 ease-in-out hover:text-[#D4AF37]">
                       {service}
                     </a>
                   </li>

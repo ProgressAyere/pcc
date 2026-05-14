@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { X, MapPin } from 'lucide-react';
+import { ProjectSkeleton } from '../../components/skeleton/Skeleton';
 
 // Import images
 import design2bed from '../../assets/constructions/building-2bedroom-bungalow.jpeg';
@@ -429,6 +430,14 @@ const FilterBar = ({ activeFilters, onFilterChange }) => {
 const Project = () => {
   const [activeFilters, setActiveFilters] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <ProjectSkeleton />;
 
   const filteredProjects = activeFilters.length === 0
     ? projects
