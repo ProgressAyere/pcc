@@ -350,7 +350,7 @@ const ProjectDetail = ({ project, onClose }) => {
                 onClick={onClose}
                 className="bg-[#D4AF37] text-white px-8 py-3 rounded font-semibold hover:bg-black transition-colors"
               >
-                Back to Portfolio
+                Back to Projects Portfolio
               </button>
             </div>
           </div>
@@ -449,8 +449,8 @@ const Project = () => {
     <div className="bg-white min-h-screen pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4">
-            Our Portfolio
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-[Inter] text-black mb-4">
+            Our Projects
           </h1>
           <p className="text-xl md:text-2xl text-[#D4AF37] font-semibold">
             Excellence in Every Structure

@@ -128,7 +128,7 @@ const Contact = () => {
     <div className="bg-black min-h-screen pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-6">
         {/* Page Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-6">Contact Us</h1>
+        <h1 className="text-4xl md:text-5xl font-bold font-[Inter] text-white text-center mb-6">Contact Us</h1>
         <p className="text-center text-white mb-12 max-w-2xl mx-auto">
           We are ready to bring your architectural vision to life. Reach out to us for consultations, project inquiries, or any questions about our services.
         </p>
@@ -292,7 +292,7 @@ const Contact = () => {
 
         {/* Footer CTA */}
         <div className="bg-[#D4AF37] text-center py-12">
-          <h2 className="text-3xl font-bold text-black">Build with Confidence. Build with PCC.</h2>
+          <h2 className="text-3xl font-bold text-black italic">Build with Confidence. Build with PCC.</h2>
         </div>
       </div>
 
@@ -301,7 +301,7 @@ const Contact = () => {
         href="https://wa.me/+2348181423564"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 bg-[#D4AF37] text-white p-4 rounded-full shadow-lg hover:bg-black hover:text-[#D4AF37] transition-all duration-300 z-50"
+        className="fixed bottom-8 left-8 bg-[#D4AF37] text-white p-4 rounded-full shadow-lg hover:bg-black hover:text-[#D4AF37] transition-all duration-300 z-50"
         aria-label="Contact us on WhatsApp"
       >
         <MessageCircle size={28} />

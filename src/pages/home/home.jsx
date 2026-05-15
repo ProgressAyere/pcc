@@ -128,7 +128,7 @@ const Home = () => {
       {/* About Section */}
       <section className="bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 text-center">
+          <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold font-[Inter] mb-3 text-center">
             About PCC
           </h2>
           <div className="w-24 h-1 bg-[#FFD700] mx-auto mb-8 sm:mb-12"></div>
@@ -180,7 +180,7 @@ const Home = () => {
       {/* Services Section */}
       <section id="services" className="bg-[#F8F8F8] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 text-center">
+          <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold font-[Inter] mb-3 text-center">
             Our Services
           </h2>
           <div className="w-24 h-1 bg-[#FFD700] mx-auto mb-8 sm:mb-12"></div>
@@ -267,7 +267,7 @@ const Home = () => {
       {/* Project Highlights Section */}
       <section className="bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 text-center">
+          <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold font-[Inter] mb-3 text-center">
             Project Highlights
           </h2>
           <div className="w-24 h-1 bg-[#FFD700] mx-auto mb-6"></div>
@@ -292,7 +292,7 @@ const Home = () => {
       {/* CEO Section */}
       <section className="bg-black py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 text-center">
+          <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold font-[Inter] mb-3 text-center">
             Meet Our CEO
           </h2>
           <div className="w-24 h-1 bg-[#FFD700] mx-auto mb-8 sm:mb-12"></div>
@@ -353,7 +353,7 @@ const Home = () => {
       {/* Testimonials Section */}
       <section className="bg-[#F8F8F8] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 text-center">
+          <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold font-[Inter] mb-3 text-center">
             Client Testimonials
           </h2>
           <div className="w-24 h-1 bg-[#FFD700] mx-auto mb-8 sm:mb-12"></div>
@@ -425,7 +425,7 @@ const Home = () => {
       {/* CTA Section */}
       <section className="bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
+          <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold font-[Inter] mb-4 sm:mb-6">
             Ready to Start Your Project?
           </h2>
           <p className="text-black text-base sm:text-lg lg:text-xl mb-8 sm:mb-10 max-w-2xl mx-auto">

@@ -65,9 +65,9 @@ const Header = () => {
           </nav>
 
           {/* CTA Button */}
-          <button className="hidden md:block bg-[#D4AF37] text-[#111111] px-6 py-2.5 text-sm font-medium tracking-wide transition-all duration-300 hover:bg-[#111111] hover:text-[#D4AF37]">
+          <a href="https://wa.me/message/7FPRM3ODTSPIE1" target="_blank" rel="noopener noreferrer" className="hidden md:block bg-[#D4AF37] text-[#111111] px-6 py-2.5 text-sm font-medium tracking-wide transition-all duration-300 hover:bg-[#111111] hover:text-[#D4AF37]">
             Get Quote
-          </button>
+          </a>
 
           {/* Mobile Menu Button */}
           <button
@@ -131,9 +131,9 @@ const Header = () => {
               {link.name}
             </Link>
           ))}
-          <button className="bg-[#D4AF37] text-[#111111] px-6 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:bg-white">
+          <a href="https://wa.me/message/7FPRM3ODTSPIE1" target="_blank" rel="noopener noreferrer" className="bg-[#D4AF37] text-[#111111] px-6 py-3 text-sm font-medium tracking-wide transition-all duration-300 hover:bg-white">
             Get Quote
-          </button>
+          </a>
         </nav>
       </div>
     </>
