@@ -23,5 +23,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Packages
+package-lock.json
+
+
 # pages
 EMAILJS_SETUP.md
+convert-png-to-svg.js

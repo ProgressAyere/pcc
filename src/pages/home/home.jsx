@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Award, Handshake, Lightbulb, Smile, Ruler, Building2, HardHat, Wrench, Briefcase, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { HomeSkeleton } from '../../components/skeleton/Skeleton';
 import heroImage from '../../assets/constructions/construction (1).jpeg';
@@ -12,6 +12,15 @@ import project3 from '../../assets/designs/building-5bedroom.jpeg';
 import project4 from '../../assets/constructions/building-2bedroom-bungalow.jpeg';
 import project5 from '../../assets/constructions/construction-7units-flat2.jpeg';
 import project6 from '../../assets/constructions/construction (10).jpeg';
+import excellenceIcon from '../../assets/3d-icons/excellence.svg';
+import integrityIcon from '../../assets/3d-icons/integrity.svg';
+import innovationIcon from '../../assets/3d-icons/innovation.svg';
+import clientSatisfactionIcon from '../../assets/3d-icons/client-satisfaction.svg';
+import architecturalDesignIcon from '../../assets/3d-icons/architectural-design.svg';
+import buildingConstructionIcon from '../../assets/3d-icons/building-construction.svg';
+import projectSupervisionIcon from '../../assets/3d-icons/project-supervision.svg';
+import renovationServicesIcon from '../../assets/3d-icons/renovation-services.svg';
+import constructionConsultancyIcon from '../../assets/3d-icons/construction-consultancy.svg';
 
 const ProjectCard = ({ projects }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -154,22 +163,22 @@ const Home = () => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             <div className="text-center p-6 border border-gray-200 rounded-lg hover:border-[#FFD700] transition-all duration-300">
-              <Award className="text-[#FFD700] w-12 h-12 mx-auto mb-4" />
+              <img src={excellenceIcon} alt="Excellence" className="w-12 h-12 mx-auto mb-4" />
               <h3 className="text-black text-xl font-semibold mb-2">Excellence</h3>
               <p className="text-black text-sm">Delivering superior quality in every project</p>
             </div>
             <div className="text-center p-6 border border-gray-200 rounded-lg hover:border-[#FFD700] transition-all duration-300">
-              <Handshake className="text-[#FFD700] w-12 h-12 mx-auto mb-4" />
+              <img src={integrityIcon} alt="Integrity" className="w-12 h-12 mx-auto mb-4" />
               <h3 className="text-black text-xl font-semibold mb-2">Integrity</h3>
               <p className="text-black text-sm">Honest and transparent in all dealings</p>
             </div>
             <div className="text-center p-6 border border-gray-200 rounded-lg hover:border-[#FFD700] transition-all duration-300">
-              <Lightbulb className="text-[#FFD700] w-12 h-12 mx-auto mb-4" />
+              <img src={innovationIcon} alt="Innovation" className="w-12 h-12 mx-auto mb-4" />
               <h3 className="text-black text-xl font-semibold mb-2">Innovation</h3>
               <p className="text-black text-sm">Creative solutions for modern challenges</p>
             </div>
             <div className="text-center p-6 border border-gray-200 rounded-lg hover:border-[#FFD700] transition-all duration-300">
-              <Smile className="text-[#FFD700] w-12 h-12 mx-auto mb-4" />
+              <img src={clientSatisfactionIcon} alt="Client Satisfaction" className="w-12 h-12 mx-auto mb-4" />
               <h3 className="text-black text-xl font-semibold mb-2">Client Satisfaction</h3>
               <p className="text-black text-sm">Your success is our priority</p>
             </div>
@@ -194,7 +203,7 @@ const Home = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: 0 }}
             >
-              <Ruler className="text-[#FFD700] w-14 h-14 mb-4" />
+              <img src={architecturalDesignIcon} alt="Architectural Design" className="w-14 h-14 mb-4" />
               <h3 className="text-black group-hover:text-white text-xl sm:text-2xl font-semibold mb-3">Architectural Design</h3>
               <p className="text-black group-hover:text-white text-sm sm:text-base">
                 Innovative and functional designs tailored to your needs and budget.
@@ -209,7 +218,7 @@ const Home = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <Building2 className="text-[#FFD700] w-14 h-14 mb-4" />
+              <img src={buildingConstructionIcon} alt="Building Construction" className="w-14 h-14 mb-4" />
               <h3 className="text-black group-hover:text-white text-xl sm:text-2xl font-semibold mb-3">Building Construction</h3>
               <p className="text-black group-hover:text-white text-sm sm:text-base">
                 Quality construction services from foundation to finishing.
@@ -224,7 +233,7 @@ const Home = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <HardHat className="text-[#FFD700] w-14 h-14 mb-4" />
+              <img src={projectSupervisionIcon} alt="Project Supervision" className="w-14 h-14 mb-4" />
               <h3 className="text-black group-hover:text-white text-xl sm:text-2xl font-semibold mb-3">Project Supervision</h3>
               <p className="text-black group-hover:text-white text-sm sm:text-base">
                 Expert oversight ensuring projects meet standards and timelines.
@@ -239,7 +248,7 @@ const Home = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <Wrench className="text-[#FFD700] w-14 h-14 mb-4" />
+              <img src={renovationServicesIcon} alt="Renovation Services" className="w-14 h-14 mb-4" />
               <h3 className="text-black group-hover:text-white text-xl sm:text-2xl font-semibold mb-3">Renovation Services</h3>
               <p className="text-black group-hover:text-white text-sm sm:text-base">
                 Transform existing spaces with modern upgrades and improvements.
@@ -254,7 +263,7 @@ const Home = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <Briefcase className="text-[#FFD700] w-14 h-14 mb-4" />
+              <img src={constructionConsultancyIcon} alt="Construction Consultancy" className="w-14 h-14 mb-4" />
               <h3 className="text-black group-hover:text-white text-xl sm:text-2xl font-semibold mb-3">Construction Consultancy</h3>
               <p className="text-black group-hover:text-white text-sm sm:text-base">
                 Professional advice and guidance for all construction needs.
