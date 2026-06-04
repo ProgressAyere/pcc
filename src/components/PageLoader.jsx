@@ -1,5 +1,5 @@
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import animationFile from '../assets/animations/your-animation.lottie';
+import animationFile from '../assets/animations/your-animation-transparent.lottie';
 
 const PageLoader = () => {
   return (
@@ -17,8 +17,6 @@ const PageLoader = () => {
   <div style={{
     borderRadius: '50%',
     overflow: 'hidden',
-    width: 300,
-    height: 300,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
