@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -53,6 +53,58 @@ const ProjectCard = ({ projects }) => {
       </div>
       <h3 className="text-black text-xl font-semibold mb-2">{current.title}</h3>
       <p className="text-black text-sm">{current.description}</p>
+    </div>
+  );
+};
+
+const CounterCard = ({ end, suffix = '', label, delay = 0 }) => {
+  const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const counterRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          let start = 0;
+          const duration = 2000;
+          const increment = end / (duration / 16);
+          
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= end) {
+              setCount(end);
+              clearInterval(timer);
+            } else {
+              setCount(Math.floor(start));
+            }
+          }, 16);
+
+          return () => clearInterval(timer);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    const currentRef = counterRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [end, hasAnimated]);
+
+  return (
+    <div ref={counterRef} className="text-center p-6 border border-[#FFD700] rounded-lg">
+      <div className="text-[#FFD700] text-4xl sm:text-5xl font-bold mb-2">
+        {count}{suffix}
+      </div>
+      <p className="text-white text-base sm:text-lg">{label}</p>
     </div>
   );
 };
@@ -343,18 +395,9 @@ const Home = () => {
           </div>
 
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
-            <div className="text-center p-6 border border-[#FFD700] rounded-lg">
-              <div className="text-[#FFD700] text-4xl sm:text-5xl font-bold mb-2">10+</div>
-              <p className="text-white text-base sm:text-lg">Years Experience</p>
-            </div>
-            <div className="text-center p-6 border border-[#FFD700] rounded-lg">
-              <div className="text-[#FFD700] text-4xl sm:text-5xl font-bold mb-2">50+</div>
-              <p className="text-white text-base sm:text-lg">Completed Projects</p>
-            </div>
-            <div className="text-center p-6 border border-[#FFD700] rounded-lg">
-              <div className="text-[#FFD700] text-4xl sm:text-5xl font-bold mb-2">100%</div>
-              <p className="text-white text-base sm:text-lg">Client Satisfaction</p>
-            </div>
+            <CounterCard end={10} suffix="+" label="Years Experience" />
+            <CounterCard end={50} suffix="+" label="Completed Projects" />
+            <CounterCard end={100} suffix="%" label="Client Satisfaction" />
           </div>
         </div>
       </section>
