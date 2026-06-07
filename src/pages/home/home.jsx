@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { HomeSkeleton } from '../../components/skeleton/Skeleton';
-import heroImage from '../../assets/constructions/construction (1).jpeg';
+import heroImage from '../../assets/constructions/construction-1.jpeg';
 import certImage from '../../assets/certification/certificate.png';
 import ceoImage from '../../assets/profile-images/profile1.jpeg';
-import project1 from '../../assets/designs/design-5bedroom-duplex.jpeg';
-import project2 from '../../assets/designs/design-7units-flat.jpeg';
-import project3 from '../../assets/designs/building-5bedroom.jpeg';
+import project1 from '../../assets/designs/5-bedroom/5bedroom-duplex.jpeg';
+import project2 from '../../assets/designs/7-units-flat/design-7units-flat.jpeg';
+import project3 from '../../assets/designs/5-bedroom/5bedroom2.jpeg';
 import project4 from '../../assets/constructions/building-2bedroom-bungalow.jpeg';
 import project5 from '../../assets/constructions/construction-7units-flat2.jpeg';
-import project6 from '../../assets/constructions/construction (10).jpeg';
+import project6 from '../../assets/constructions/construction-10.jpeg';
 import excellenceIcon from '../../assets/3d-icons/excellence.svg';
 import integrityIcon from '../../assets/3d-icons/integrity.svg';
 import innovationIcon from '../../assets/3d-icons/innovation.svg';
@@ -180,7 +180,7 @@ const Home = () => {
               Request Consultation
             </button>
             <button onClick={() => navigate('/project')} className="border-2 border-[#FFD700] text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded hover:bg-[#FFD700] hover:text-white transition-all duration-300 min-h-[44px]">
-              View Our Projects
+              View Our Design & Projects
             </button>
           </div>
         </div>

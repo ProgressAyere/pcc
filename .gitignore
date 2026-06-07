@@ -29,4 +29,12 @@ package-lock.json
 
 # pages
 EMAILJS_SETUP.md
+convert-png-to-svg.
 convert-png-to-svg.js
+ADMIN_DASHBOARD_README.md
+ADMIN_SETUP_COMPLETE.md
+EXAMPLE_SUPABASE_INTEGRATION.jsx
+SETUP_CHECKLIST.md
+START_HERE.md
+SUPABASE_QUICKSTART.md
+SUPABASE_SETUP.md

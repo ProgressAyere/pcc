@@ -31,3 +31,13 @@
 .animate-slideIn {
   animation: slideIn 0.5s ease-in-out forwards;
 }
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

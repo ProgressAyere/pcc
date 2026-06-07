@@ -1,281 +1,368 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, MapPin } from 'lucide-react';
 import { ProjectSkeleton } from '../../components/skeleton/Skeleton';
 
 // Import images
 import design2bed from '../../assets/constructions/building-2bedroom-bungalow.jpeg';
 import design2bed2 from '../../assets/constructions/building-2bedroom-bungalow1.jpeg';
-import design3bed from '../../assets/designs/3bedroom-bungalow-design.jpeg';
-import design3bed2 from '../../assets/designs/3bedroom1.jpeg';
-import design3bed3 from '../../assets/designs/3bedroom2.jpeg';
-import design3bed4 from '../../assets/designs/3bedroom-bungalow-with-1bedroom-apartment.jpeg';
-import design4bed from '../../assets/designs/building-4bedroom.jpeg';
-import design4bed2 from '../../assets/designs/4bedroom1.jpeg';
-import design4bed3 from '../../assets/designs/4bedroom2.jpeg';
-import design5bed from '../../assets/designs/building-5bedroom.jpeg';
-import design5bed2 from '../../assets/designs/building-5bedroom1.jpeg';
-import designDuplex from '../../assets/designs/design-5bedroom-duplex.jpeg';
-import design7units from '../../assets/designs/design-7units-flat.jpeg';
-import construction7units from '../../assets/constructions/construction-7units-flat.jpeg';
+import design3bed1 from '../../assets/designs/3-bedroom/3bedroom1.jpeg';
+import design3bed2 from '../../assets/designs/3-bedroom/3bedroom2.jpeg';
+import design3bed3 from '../../assets/designs/3-bedroom/3bedroomBungalow-with-2bedroom.jpeg';
+import design3bedBung1 from '../../assets/designs/3-bedroom-bungalow/3bedroom-bungalow-design.jpeg';
+import design3bedBung2 from '../../assets/designs/3-bedroom-bungalow/3bedroom-bungalow-with-1bedroom-apartment.jpeg';
+import design4bed1 from '../../assets/designs/4-bedroom/building-4bedroom.jpeg';
+import design4bed2 from '../../assets/designs/4-bedroom/4bedroom1.jpeg';
+import design4bed3 from '../../assets/designs/4-bedroom/4bedroom2.jpeg';
+import design5bed1 from '../../assets/designs/5-bedroom/5bedroom-duplex.jpeg';
+import design5bed2 from '../../assets/designs/5-bedroom/5bedroom1.jpeg';
+import design5bed3 from '../../assets/designs/5-bedroom/5bedroom2.jpeg';
+import design7units from '../../assets/designs/7-units-flat/design-7units-flat.jpeg';
+import apartment1 from '../../assets/designs/apartment-design/apartmentDesign-1.jpeg';
+import apartment2 from '../../assets/designs/apartment-design/apartmentDesign-2.jpeg';
+import apartment3 from '../../assets/designs/apartment-design/apartmentDesign-3.jpeg';
+import apartment4 from '../../assets/designs/apartment-design/apartmentDesign-4.jpeg';
+import blocksFlat from '../../assets/designs/blocks-of-flat/designs-block-of-flats.jpeg';
+import hostel1 from '../../assets/designs/senate-hostel/senate-hostel-1.jpeg';
+import hostel2 from '../../assets/designs/senate-hostel/senate-hostel-2.jpeg';
+import hostel3 from '../../assets/designs/senate-hostel/senate-hostel-3.jpeg';
+import mall1 from '../../assets/designs/shopping-mall/Shopping-mall-1.jpeg';
+import mall2 from '../../assets/designs/shopping-mall/Shopping-mall-2.jpeg';
+import mall3 from '../../assets/designs/shopping-mall/Shopping-mall-3.jpeg';
+import mall4 from '../../assets/designs/shopping-mall/Shopping-mall-4.jpeg';
 import construction7units2 from '../../assets/constructions/construction-7units-flat1.jpeg';
-import hostel1 from '../../assets/designs/senate-hostel (1).jpeg';
-import hostel2 from '../../assets/designs/senate-hostel (2).jpeg';
-import hostel3 from '../../assets/designs/senate-hostel (3).jpeg';
-import mall1 from '../../assets/designs/Shopping-mall (1).jpeg';
-import mall2 from '../../assets/designs/Shopping-mall (2).jpeg';
-import mall3 from '../../assets/designs/Shopping-mall (3).jpeg';
-import mall4 from '../../assets/designs/Shopping-mall (4).jpeg';
-import construction1 from '../../assets/constructions/construction (1).jpeg';
-import construction2 from '../../assets/constructions/construction (2).jpeg';
-import construction3 from '../../assets/constructions/construction (3).jpeg';
-import construction4 from '../../assets/constructions/construction (4).jpeg';
-import construction5 from '../../assets/constructions/construction (5).jpeg';
-import construction6 from '../../assets/constructions/construction (6).jpeg';
+import construction7units3 from '../../assets/constructions/construction-7units-flat2.jpeg';
+import construction1 from '../../assets/constructions/construction-1.jpeg';
+import construction2 from '../../assets/constructions/construction-2.jpeg';
+import construction3 from '../../assets/constructions/construction-3.jpeg';
+import construction4 from '../../assets/constructions/construction-4.jpeg';
+import construction5 from '../../assets/constructions/construction-5.jpeg';
+import construction6 from '../../assets/constructions/construction-6.jpeg';
+import construction7 from '../../assets/constructions/construction-7.jpeg';
+import construction8 from '../../assets/constructions/construction-8.jpeg';
+import construction9 from '../../assets/constructions/construction-9.jpeg';
+import construction10 from '../../assets/constructions/construction-10.jpeg';
+import construction11 from '../../assets/constructions/construction-11.jpeg';
+import construction12 from '../../assets/constructions/construction-12.jpeg';
+import construction13 from '../../assets/constructions/construction-13.jpeg';
+import construction14 from '../../assets/constructions/construction-14.jpeg';
+import construction15 from '../../assets/constructions/construction-15.jpeg';
+import construction16 from '../../assets/constructions/construction-16.jpeg';
+import construction17 from '../../assets/constructions/construction-17.jpeg';
+import construction25 from '../../assets/constructions/construction25.jpeg';
+import construction26 from '../../assets/constructions/construction26.jpeg';
+import construction27 from '../../assets/constructions/constrcution27.jpeg';
+import construction28 from '../../assets/constructions/constrcution28.jpeg';
+import construction111 from '../../assets/constructions/construction-111.jpeg';
+import firstStage1 from '../../assets/constructions/first-stage-of-building-1.jpeg';
+import firstStage2 from '../../assets/constructions/first-stage-of-building-2.jpeg';
+import firstStage3 from '../../assets/constructions/first-stage-of-building-3.jpeg';
+import firstStage4 from '../../assets/constructions/first-stage-of-building-4.jpeg';
+import firstStage5 from '../../assets/constructions/first-stage-of-building-5.jpeg';
+import firstStage6 from '../../assets/constructions/first-stage-of-building-6.jpeg';
+import firstStage7 from '../../assets/constructions/first-stage-of-building-7.jpeg';
+import firstStage8 from '../../assets/constructions/first-stage-of-building-8.jpeg';
+import onsite from '../../assets/constructions/onsite.jpeg';
+import onsite2 from '../../assets/constructions/onsite2.jpeg';
+import onsite4 from '../../assets/constructions/onsite4.jpeg';
 import videoSrc from '../../assets/constructions/construction-video.mp4';
+import fastforwardedVideo from '../../assets/constructions/fastforwarded.mp4';
+import introVideo from '../../assets/constructions/intro.mp4';
+import menWorkingVideo from '../../assets/constructions/men-working.mp4';
+import overviewVideo from '../../assets/constructions/overview-of-work.mp4';
+import buildingConstructionIcon from '../../assets/3d-icons/building-construction.svg';
+import projectsIcon from '../../assets/3d-icons/projects.svg';
+import headerBg from '../../assets/designs/senate-hostel/senate-hostel-3.jpeg';
 
 // Project data
 const projects = [
   {
     id: 1,
-    title: '2 Bedroom Bungalow',
-    category: ['2 Bedroom', 'Completed'],
-    image: design2bed,
-    beforeImage: design2bed,
-    afterImage: design2bed2,
+    title: '3 Bedroom Design',
+    category: ['3 Bedroom'],
+    type: 'design',
+    image: design3bed1,
+    images: [design3bed1, design3bed2, design3bed3],
     location: 'Lagos, Nigeria',
-    description: 'A beautifully designed 2-bedroom bungalow featuring modern architecture and efficient space utilization. This project showcases our commitment to quality construction and attention to detail.',
-    video: videoSrc,
+    description: 'Contemporary 3-bedroom design with spacious living areas and modern amenities. Designed for comfort and functionality.',
     status: 'Completed'
   },
   {
     id: 2,
     title: '3 Bedroom Bungalow Design',
     category: ['3 Bedroom'],
-    image: design3bed,
-    beforeImage: design3bed,
-    afterImage: design3bed2,
+    type: 'design',
+    image: design3bedBung1,
+    images: [design3bedBung1, design3bedBung2],
     location: 'Port Harcourt, Nigeria',
-    description: 'Contemporary 3-bedroom bungalow with spacious living areas and modern amenities. Designed for comfort and functionality.',
-    video: null,
-    status: 'In Progress'
+    description: '3-bedroom bungalow with additional 1-bedroom apartment. Perfect for extended families or rental income opportunities.',
+    status: 'Completed'
   },
   {
     id: 3,
-    title: '3 Bedroom with Apartment',
-    category: ['3 Bedroom'],
-    image: design3bed4,
-    beforeImage: design3bed4,
-    afterImage: design3bed3,
-    location: 'Abuja, Nigeria',
-    description: '3-bedroom bungalow with additional 1-bedroom apartment. Perfect for extended families or rental income opportunities.',
-    video: null,
+    title: '4 Bedroom Residence Design',
+    category: ['4 Bedroom'],
+    type: 'design',
+    image: design4bed1,
+    images: [design4bed1, design4bed2, design4bed3],
+    location: 'Lagos, Nigeria',
+    description: 'Elegant 4-bedroom residence with contemporary design elements and premium finishes throughout.',
     status: 'Completed'
   },
   {
     id: 4,
-    title: '4 Bedroom Residence',
-    category: ['4 Bedroom'],
-    image: design4bed,
-    beforeImage: design4bed,
-    afterImage: design4bed2,
+    title: '5 Bedroom Duplex Design',
+    category: ['Duplex'],
+    type: 'design',
+    image: design5bed1,
+    images: [design5bed1, design5bed2, design5bed3],
     location: 'Lagos, Nigeria',
-    description: 'Elegant 4-bedroom residence with contemporary design elements and premium finishes throughout.',
-    video: null,
-    status: 'In Progress'
+    description: 'Stunning 5-bedroom duplex with contemporary design, featuring spacious living areas and premium amenities.',
+    status: 'Completed'
   },
   {
     id: 5,
-    title: '4 Bedroom Luxury Home',
-    category: ['4 Bedroom', 'Completed'],
-    image: design4bed3,
-    beforeImage: design4bed3,
-    afterImage: construction1,
-    location: 'Asaba, Nigeria',
-    description: 'Luxury 4-bedroom home featuring high-end finishes, spacious rooms, and modern architectural design.',
-    video: videoSrc,
+    title: '7 Units Flat Design',
+    category: ['7 Bedroom'],
+    type: 'design',
+    image: design7units,
+    images: [design7units],
+    location: 'Lagos, Nigeria',
+    description: 'Multi-unit residential complex featuring 7 modern apartments with efficient space planning and contemporary design.',
     status: 'Completed'
   },
   {
     id: 6,
-    title: '5 Bedroom Duplex',
-    category: ['Duplex', 'Completed'],
-    image: designDuplex,
-    beforeImage: designDuplex,
-    afterImage: design5bed,
-    location: 'Lagos, Nigeria',
-    description: 'Stunning 5-bedroom duplex with contemporary design, featuring spacious living areas and premium amenities.',
-    video: videoSrc,
+    title: 'Apartment Design',
+    category: ['4 Bedroom'],
+    type: 'design',
+    image: apartment1,
+    images: [apartment1, apartment2, apartment3, apartment4],
+    location: 'Abuja, Nigeria',
+    description: 'Modern apartment complex with multiple units featuring contemporary design and efficient space utilization.',
     status: 'Completed'
   },
   {
     id: 7,
-    title: '5 Bedroom Estate Home',
-    category: ['Duplex'],
-    image: design5bed2,
-    beforeImage: design5bed2,
-    afterImage: construction2,
-    location: 'Port Harcourt, Nigeria',
-    description: 'Premium 5-bedroom estate home with modern architecture and luxurious interior spaces.',
-    video: null,
-    status: 'In Progress'
+    title: 'Blocks of Flat Design',
+    category: ['7 Bedroom'],
+    type: 'design',
+    image: blocksFlat,
+    images: [blocksFlat],
+    location: 'Lagos, Nigeria',
+    description: 'Multi-story blocks of flats with modern architecture and comprehensive amenities for residents.',
+    status: 'Completed'
   },
   {
     id: 8,
-    title: '7 Units Apartment Complex',
-    category: ['7 Bedroom', 'Completed'],
-    image: design7units,
-    beforeImage: design7units,
-    afterImage: construction7units,
-    location: 'Lagos, Nigeria',
-    description: 'Multi-unit residential complex featuring 7 modern apartments with efficient space planning and contemporary design.',
-    video: videoSrc,
+    title: 'Senate Hostel Complex Design',
+    category: ['Hostel'],
+    type: 'design',
+    image: hostel1,
+    images: [hostel1, hostel2, hostel3],
+    location: 'Enugu, Nigeria',
+    description: 'Modern student hostel complex with multiple rooms, common areas, and security features. Designed for comfort and functionality.',
     status: 'Completed'
   },
   {
     id: 9,
+    title: 'Shopping Mall Design',
+    category: ['Shopping Mall'],
+    type: 'design',
+    image: mall1,
+    images: [mall1, mall2, mall3, mall4],
+    location: 'Lagos, Nigeria',
+    description: 'State-of-the-art shopping mall with modern retail spaces, parking facilities, and contemporary architecture.',
+    status: 'Completed'
+  },
+  {
+    id: 10,
+    title: '2 Bedroom Bungalow Construction',
+    category: ['2 Bedroom'],
+    type: 'construction',
+    image: design2bed,
+    images: [design2bed, design2bed2],
+    location: 'Lagos, Nigeria',
+    description: 'A beautifully designed 2-bedroom bungalow featuring modern architecture and efficient space utilization.',
+    video: videoSrc,
+    status: 'Completed'
+  },
+  {
+    id: 11,
     title: '7 Units Flat Construction',
     category: ['7 Bedroom'],
+    type: 'construction',
     image: construction7units2,
-    beforeImage: construction7units2,
-    afterImage: construction3,
+    images: [construction7units2, construction7units3, construction3],
     location: 'Abuja, Nigeria',
     description: 'Ongoing construction of 7-unit apartment building with modern amenities and quality finishes.',
     video: null,
     status: 'In Progress'
   },
   {
-    id: 10,
-    title: 'Senate Hostel Complex',
-    category: ['Hostel', 'Completed'],
-    image: hostel1,
-    beforeImage: hostel1,
-    afterImage: hostel2,
-    location: 'Enugu, Nigeria',
-    description: 'Modern student hostel complex with multiple rooms, common areas, and security features. Designed for comfort and functionality.',
-    video: videoSrc,
-    status: 'Completed'
-  },
-  {
-    id: 11,
-    title: 'University Hostel',
-    category: ['Hostel'],
-    image: hostel3,
-    beforeImage: hostel3,
-    afterImage: construction4,
-    location: 'Lagos, Nigeria',
-    description: 'Contemporary university hostel with modern facilities and comfortable living spaces for students.',
-    video: null,
-    status: 'In Progress'
-  },
-  {
     id: 12,
-    title: 'Premium Shopping Mall',
-    category: ['Shopping Mall', 'Completed'],
-    image: mall1,
-    beforeImage: mall1,
-    afterImage: mall2,
-    location: 'Lagos, Nigeria',
-    description: 'State-of-the-art shopping mall with modern retail spaces, parking facilities, and contemporary architecture.',
+    title: 'Residential Construction Project',
+    category: ['2 Bedroom'],
+    type: 'construction',
+    image: construction5,
+    images: [construction5, construction6],
+    location: 'Asaba, Nigeria',
+    description: 'Quality residential construction showcasing our expertise in building durable and beautiful homes.',
     video: videoSrc,
     status: 'Completed'
   },
   {
     id: 13,
-    title: 'Commercial Shopping Center',
-    category: ['Shopping Mall'],
-    image: mall3,
-    beforeImage: mall3,
-    afterImage: mall4,
+    title: 'Modern Residential Construction',
+    category: ['3 Bedroom'],
+    type: 'construction',
+    image: construction1,
+    images: [construction1, construction2, construction4],
+    location: 'Lagos, Nigeria',
+    description: 'Contemporary residential building with modern architectural design and quality construction.',
+    video: null,
+    status: 'Completed'
+  },
+  {
+    id: 14,
+    title: 'Duplex Construction Project',
+    category: ['Duplex'],
+    type: 'construction',
+    image: construction7,
+    images: [construction7, construction8, construction9],
     location: 'Port Harcourt, Nigeria',
-    description: 'Large-scale commercial shopping center featuring multiple retail units and modern amenities.',
+    description: 'High-end duplex construction featuring premium materials and expert craftsmanship.',
+    video: fastforwardedVideo,
+    status: 'In Progress'
+  },
+  {
+    id: 15,
+    title: 'Estate Development Construction',
+    category: ['4 Bedroom'],
+    type: 'construction',
+    image: construction10,
+    images: [construction10, construction11, construction12],
+    location: 'Abuja, Nigeria',
+    description: 'Large-scale estate development with multiple residential units and modern infrastructure.',
     video: null,
     status: 'In Progress'
   },
   {
-    id: 14,
-    title: 'Residential Construction',
-    category: ['Completed'],
-    image: construction5,
-    beforeImage: construction5,
-    afterImage: construction6,
-    location: 'Asaba, Nigeria',
-    description: 'Quality residential construction showcasing our expertise in building durable and beautiful homes.',
-    video: videoSrc,
+    id: 16,
+    title: 'Luxury Home Construction',
+    category: ['4 Bedroom'],
+    type: 'construction',
+    image: construction13,
+    images: [construction13, construction14, construction15],
+    location: 'Lagos, Nigeria',
+    description: 'Luxury residential construction with premium finishes and sophisticated design elements.',
+    video: overviewVideo,
     status: 'Completed'
+  },
+  {
+    id: 17,
+    title: 'Contemporary Building Project',
+    category: ['3 Bedroom'],
+    type: 'construction',
+    image: construction16,
+    images: [construction16, construction17, construction111],
+    location: 'Enugu, Nigeria',
+    description: 'Contemporary building featuring innovative construction techniques and modern amenities.',
+    video: null,
+    status: 'In Progress'
+  },
+  {
+    id: 18,
+    title: 'Commercial Construction',
+    category: ['Shopping Mall'],
+    type: 'construction',
+    image: construction25,
+    images: [construction25, construction26, construction27, construction28],
+    location: 'Lagos, Nigeria',
+    description: 'Commercial construction project with modern facilities and strategic location.',
+    video: menWorkingVideo,
+    status: 'In Progress'
+  },
+  {
+    id: 19,
+    title: 'Foundation & First Stage Construction',
+    category: ['4 Bedroom'],
+    type: 'construction',
+    image: firstStage1,
+    images: [firstStage1, firstStage2, firstStage3, firstStage4, firstStage5, firstStage6, firstStage7, firstStage8],
+    location: 'Port Harcourt, Nigeria',
+    description: 'Foundation and early stage construction showcasing our attention to structural integrity and quality workmanship.',
+    video: introVideo,
+    status: 'In Progress'
+  },
+  {
+    id: 20,
+    title: 'On-Site Construction Work',
+    category: ['3 Bedroom'],
+    type: 'construction',
+    image: onsite,
+    images: [onsite, onsite2, onsite4],
+    location: 'Asaba, Nigeria',
+    description: 'Active construction site showcasing our team at work building quality residential structures.',
+    video: null,
+    status: 'In Progress'
   }
 ];
 
 // Filter categories
 const filterCategories = [
+  'All',
   '2 Bedroom',
   '3 Bedroom',
   '4 Bedroom',
   'Duplex',
   '7 Bedroom',
   'Shopping Mall',
-  'Hostel',
-  'Completed'
+  'Hostel'
 ];
 
-// Before/After Slider Component
-const BeforeAfterSlider = ({ beforeImage, afterImage, title }) => {
-  const [sliderPosition, setSliderPosition] = useState(50);
-  const [isDragging, setIsDragging] = useState(false);
-  const containerRef = useRef(null);
+// Image Gallery Component
+const ImageGallery = ({ images, title }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleMove = (clientX) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
-    const percent = Math.max(0, Math.min((x / rect.width) * 100, 100));
-    setSliderPosition(percent);
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
   };
 
-  const handleMouseDown = () => setIsDragging(true);
-  const handleMouseUp = () => setIsDragging(false);
-
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    handleMove(e.clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    if (!isDragging) return;
-    handleMove(e.touches[0].clientX);
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full h-96 md:h-[500px] overflow-hidden cursor-ew-resize select-none"
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleMouseUp}
-    >
-      <img src={afterImage} alt={`${title} - After`} className="absolute inset-0 w-full h-full object-cover" />
-      <div
-        className="absolute inset-0 w-full h-full overflow-hidden"
-        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-      >
-        <img src={beforeImage} alt={`${title} - Before`} className="absolute inset-0 w-full h-full object-cover" />
-      </div>
-      <div
-        className="absolute top-0 bottom-0 w-1 bg-[#D4AF37] cursor-ew-resize"
-        style={{ left: `${sliderPosition}%` }}
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleMouseDown}
-      >
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-[#D4AF37] rounded-full flex items-center justify-center shadow-lg">
-          <div className="flex gap-1">
-            <div className="w-0.5 h-4 bg-white"></div>
-            <div className="w-0.5 h-4 bg-white"></div>
+    <div className="relative w-full h-96 md:h-[500px] overflow-hidden bg-black">
+      <img 
+        src={images[currentIndex]} 
+        alt={`${title} ${currentIndex + 1}`} 
+        className="w-full h-full object-contain" 
+      />
+      
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={goToPrevious}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-[#D4AF37] hover:bg-black text-white p-3 rounded-full transition-colors"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={goToNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-[#D4AF37] hover:bg-black text-white p-3 rounded-full transition-colors"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm">
+            {currentIndex + 1} / {images.length}
           </div>
-        </div>
-      </div>
-      <div className="absolute top-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 text-sm rounded">Before</div>
-      <div className="absolute top-4 right-4 bg-black bg-opacity-70 text-white px-3 py-1 text-sm rounded">After</div>
+        </>
+      )}
     </div>
   );
 };
@@ -304,10 +391,9 @@ const ProjectDetail = ({ project, onClose }) => {
 
             <div className="border-t-2 border-black my-8"></div>
 
-            <h2 className="text-2xl font-bold text-[#D4AF37] mb-4">Before & After</h2>
-            <BeforeAfterSlider
-              beforeImage={project.beforeImage}
-              afterImage={project.afterImage}
+            <h2 className="text-2xl font-bold text-[#D4AF37] mb-4">Project Designs</h2>
+            <ImageGallery
+              images={project.images}
               title={project.title}
             />
 
@@ -392,7 +478,9 @@ const ProjectCard = ({ project, onClick }) => {
 // Filter Bar Component
 const FilterBar = ({ activeFilters, onFilterChange }) => {
   const toggleFilter = (filter) => {
-    if (activeFilters.includes(filter)) {
+    if (filter === 'All') {
+      onFilterChange([]);
+    } else if (activeFilters.includes(filter)) {
       onFilterChange(activeFilters.filter((f) => f !== filter));
     } else {
       onFilterChange([...activeFilters, filter]);
@@ -400,13 +488,17 @@ const FilterBar = ({ activeFilters, onFilterChange }) => {
   };
 
   return (
-    <div className="flex flex-wrap gap-3 justify-center mb-12">
+    <div className="flex gap-3 overflow-x-auto scrollbar-hide mb-12 pb-2">
       {filterCategories.map((category) => (
         <button
           key={category}
           onClick={() => toggleFilter(category)}
-          className={`px-4 sm:px-6 py-2 sm:py-3 rounded font-semibold transition-all duration-300 min-h-[44px] text-sm sm:text-base ${
-            activeFilters.includes(category)
+          className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-300 min-h-[44px] text-sm sm:text-base whitespace-nowrap ${
+            category === 'All'
+              ? activeFilters.length === 0
+                ? 'bg-[#D4AF37] text-black'
+                : 'bg-white border-2 border-[#D4AF37] text-black hover:bg-[#D4AF37] hover:text-white'
+              : activeFilters.includes(category)
               ? 'bg-[#D4AF37] text-black'
               : 'bg-white border-2 border-[#D4AF37] text-black hover:bg-[#D4AF37] hover:text-white'
           }`}
@@ -428,6 +520,7 @@ const FilterBar = ({ activeFilters, onFilterChange }) => {
 
 // Main Project Component
 const Project = () => {
+  const [activeTab, setActiveTab] = useState('design');
   const [activeFilters, setActiveFilters] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -439,17 +532,41 @@ const Project = () => {
 
   if (loading) return <ProjectSkeleton />;
 
+  const designProjects = projects.filter(p => p.type === 'design');
+  const constructionProjects = projects.filter(p => p.type === 'construction');
+
+  const currentProjects = activeTab === 'design' ? designProjects : constructionProjects;
+
   const filteredProjects = activeFilters.length === 0
-    ? projects
-    : projects.filter((project) =>
+    ? currentProjects
+    : currentProjects.filter((project) =>
         activeFilters.some((filter) => project.category.includes(filter))
       );
 
   return (
     <div className="bg-white min-h-screen pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-[Inter] text-black mb-4">
+
+      {/* ── IMAGE HEADER + TAB SECTION — full bleed ── */}
+      <div className="w-full px-4 sm:px-6 lg:px-8 pt-10 pb-0 mb-8 overflow-hidden relative">
+
+        {/* Blurred background image layer */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${headerBg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            filter: 'blur(3px)',
+            transform: 'scale(1.05)',
+          }}
+        />
+
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/60" />
+
+        {/* Header text */}
+        <div className="text-center mb-8 relative z-10">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-[Inter] text-white mb-4">
             Our Projects
           </h1>
           <p className="text-xl md:text-2xl text-[#D4AF37] font-semibold">
@@ -458,6 +575,52 @@ const Project = () => {
           <div className="w-24 h-1 bg-[#D4AF37] mx-auto mt-6"></div>
         </div>
 
+        {/* Joined Tab Navigation */}
+        <div className="flex border-t border-white/10 max-w-2xl mx-auto relative z-10">
+          <button
+            onClick={() => {
+              setActiveTab('design');
+              setActiveFilters([]);
+            }}
+            className={`flex-1 flex items-center justify-center gap-2 px-4 py-4 font-semibold transition-all duration-300 relative ${
+              activeTab === 'design'
+                ? 'text-white after:absolute after:bottom-0 after:left-1/4 after:w-1/2 after:h-0.5 after:bg-[#D4AF37]'
+                : 'text-white/40 hover:text-white/70'
+            }`}
+          >
+            <img src={buildingConstructionIcon} alt="3D Designs" className="w-6 h-6" />
+            <span className="text-sm">3D DESIGNS</span>
+            <span className="bg-[#D4AF37] text-black px-2 py-1 rounded-full text-xs font-bold">
+              {designProjects.length}
+            </span>
+          </button>
+
+          {/* Vertical divider between tabs */}
+          <div className="w-px bg-white/10 my-3" />
+
+          <button
+            onClick={() => {
+              setActiveTab('construction');
+              setActiveFilters([]);
+            }}
+            className={`flex-1 flex items-center justify-center gap-2 px-4 py-4 font-semibold transition-all duration-300 relative ${
+              activeTab === 'construction'
+                ? 'text-white after:absolute after:bottom-0 after:left-1/4 after:w-1/2 after:h-0.5 after:bg-[#D4AF37]'
+                : 'text-white/40 hover:text-white/70'
+            }`}
+          >
+            <img src={projectsIcon} alt="Projects" className="w-6 h-6" />
+            <span className="text-sm">PROJECTS</span>
+            <span className="bg-[#D4AF37] text-black px-2 py-1 rounded-full text-xs font-bold">
+              {constructionProjects.length}
+            </span>
+          </button>
+        </div>
+      </div>
+      {/* ── END HEADER SECTION ── */}
+
+      {/* Rest of page inside constrained container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FilterBar activeFilters={activeFilters} onFilterChange={setActiveFilters} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
