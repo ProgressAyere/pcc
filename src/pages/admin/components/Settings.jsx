@@ -1,35 +1,225 @@
-import React, { useState } from 'react';
-import { Save, Building, Phone, Mail, Globe, MapPin } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Save, Building, Phone, Mail, Globe, MapPin, Loader2 } from 'lucide-react';
+import { supabase } from '../../../config/supabaseClient';
+import { useAuth } from '../../../context/AuthContext';
 
 const Settings = () => {
+  const { user } = useAuth();
   const [companyInfo, setCompanyInfo] = useState({
-    name: 'Pad Construction Consult and Services (PCC)',
-    email: 'info@pcc.com',
-    phone: '+234 123 456 7890',
-    address: 'Lagos, Nigeria',
-    website: 'www.pcc.com'
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    website: ''
   });
 
   const [socialMedia, setSocialMedia] = useState({
-    facebook: 'https://facebook.com/pcc',
-    instagram: 'https://instagram.com/pcc',
-    twitter: 'https://twitter.com/pcc',
-    linkedin: 'https://linkedin.com/company/pcc'
+    facebook: '',
+    instagram: '',
+    tiktok: ''
+  });
+
+  const [passwordData, setPasswordData] = useState({
+    newPassword: '',
+    confirmPassword: ''
   });
 
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
-  const handleSaveCompanyInfo = (e) => {
-    e.preventDefault();
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+  // Load settings from Supabase
+  useEffect(() => {
+    loadSettings();
+  }, []);
+
+  const loadSettings = async () => {
+    try {
+      setLoading(true);
+      console.log('🔄 Loading settings from Supabase...');
+      
+      const { data, error } = await supabase
+        .from('admin_settings')
+        .select('setting_key, setting_value');
+
+      if (error) throw error;
+
+      console.log('✅ Settings loaded from database:', data);
+
+      // Map settings to state
+      const settings = {};
+      data.forEach(item => {
+        settings[item.setting_key] = item.setting_value;
+      });
+
+      console.log('📦 Mapped settings object:', settings);
+
+      // Update company info
+      setCompanyInfo({
+        name: settings.company_name || 'Pad Construction Consult and Services (PCC)',
+        email: settings.company_email || '',
+        phone: settings.company_phone || '',
+        address: settings.company_address || '',
+        website: settings.company_website || ''
+      });
+
+      // Update social media
+      setSocialMedia({
+        facebook: settings.social_facebook || '',
+        instagram: settings.social_instagram || '',
+        tiktok: settings.social_tiktok || ''
+      });
+
+      console.log('✅ State updated with settings');
+
+    } catch (error) {
+      console.error('❌ Error loading settings:', error);
+      setError('Failed to load settings');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleSaveSocialMedia = (e) => {
-    e.preventDefault();
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+  // Update or insert a setting
+  const updateSetting = async (key, value, category = 'general') => {
+    console.log(`🔄 Updating setting: ${key} = ${value}`);
+    
+    const { data: existing } = await supabase
+      .from('admin_settings')
+      .select('id')
+      .eq('setting_key', key)
+      .single();
+
+    if (existing) {
+      console.log(`📝 Setting exists, updating: ${key}`);
+      // Update existing setting
+      const { error } = await supabase
+        .from('admin_settings')
+        .update({ 
+          setting_value: value,
+          updated_at: new Date().toISOString(),
+          updated_by: user?.id
+        })
+        .eq('setting_key', key);
+      
+      if (error) throw error;
+      console.log(`✅ Updated: ${key}`);
+    } else {
+      console.log(`➕ Setting doesn't exist, creating: ${key}`);
+      // Insert new setting
+      const { error } = await supabase
+        .from('admin_settings')
+        .insert({
+          setting_key: key,
+          setting_value: value,
+          setting_type: 'text',
+          category: category,
+          updated_by: user?.id
+        });
+      
+      if (error) throw error;
+      console.log(`✅ Created: ${key}`);
+    }
   };
+
+  const handleSaveCompanyInfo = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    setError('');
+
+    console.log('💾 Saving company information...');
+    console.log('Company Info Data:', companyInfo);
+
+    try {
+      await updateSetting('company_name', companyInfo.name, 'company');
+      await updateSetting('company_email', companyInfo.email, 'company');
+      await updateSetting('company_phone', companyInfo.phone, 'company');
+      await updateSetting('company_address', companyInfo.address, 'company');
+      await updateSetting('company_website', companyInfo.website, 'company');
+
+      console.log('✅ Company information saved successfully!');
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } catch (error) {
+      console.error('❌ Error saving company info:', error);
+      setError('Failed to save company information');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleSaveSocialMedia = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    setError('');
+
+    console.log('💾 Saving social media links...');
+    console.log('Social Media Data:', socialMedia);
+
+    try {
+      await updateSetting('social_facebook', socialMedia.facebook, 'social');
+      await updateSetting('social_instagram', socialMedia.instagram, 'social');
+      await updateSetting('social_tiktok', socialMedia.tiktok, 'social');
+
+      console.log('✅ Social media links saved successfully!');
+      console.log('Final values in database:', {
+        facebook: socialMedia.facebook,
+        instagram: socialMedia.instagram,
+        tiktok: socialMedia.tiktok
+      });
+      
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } catch (error) {
+      console.error('❌ Error saving social media:', error);
+      setError('Failed to save social media links');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      setError('New passwords do not match');
+      return;
+    }
+
+    if (passwordData.newPassword.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+
+    setSaving(true);
+
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password: passwordData.newPassword
+      });
+
+      if (error) throw error;
+
+      setSaved(true);
+      setPasswordData({ newPassword: '', confirmPassword: '' });
+      setTimeout(() => setSaved(false), 3000);
+    } catch (error) {
+      console.error('Error changing password:', error);
+      setError(error.message || 'Failed to update password');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="w-8 h-8 animate-spin text-[#FFD700]" />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -38,6 +228,12 @@ const Settings = () => {
       {saved && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
           Settings saved successfully!
+        </div>
+      )}
+
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+          {error}
         </div>
       )}
 
@@ -114,10 +310,20 @@ const Settings = () => {
 
             <button
               type="submit"
-              className="w-full bg-[#FFD700] text-black font-semibold py-3 rounded hover:bg-yellow-500 transition-all flex items-center justify-center gap-2"
+              disabled={saving}
+              className="w-full bg-[#FFD700] text-black font-semibold py-3 rounded hover:bg-yellow-500 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Save className="w-5 h-5" />
-              Save Company Info
+              {saving ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Save className="w-5 h-5" />
+                  Save Company Info
+                </>
+              )}
             </button>
           </form>
         </div>
@@ -153,55 +359,53 @@ const Settings = () => {
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 font-semibold mb-2">Twitter</label>
+              <label className="block text-gray-700 font-semibold mb-2">TikTok</label>
               <input
                 type="url"
-                value={socialMedia.twitter}
-                onChange={(e) => setSocialMedia({ ...socialMedia, twitter: e.target.value })}
+                value={socialMedia.tiktok}
+                onChange={(e) => setSocialMedia({ ...socialMedia, tiktok: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#FFD700]"
-                placeholder="https://twitter.com/yourprofile"
-              />
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-gray-700 font-semibold mb-2">LinkedIn</label>
-              <input
-                type="url"
-                value={socialMedia.linkedin}
-                onChange={(e) => setSocialMedia({ ...socialMedia, linkedin: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#FFD700]"
-                placeholder="https://linkedin.com/company/yourcompany"
+                placeholder="https://tiktok.com/@yourprofile"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-[#FFD700] text-black font-semibold py-3 rounded hover:bg-yellow-500 transition-all flex items-center justify-center gap-2"
+              disabled={saving}
+              className="w-full bg-[#FFD700] text-black font-semibold py-3 rounded hover:bg-yellow-500 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Save className="w-5 h-5" />
-              Save Social Media
+              {saving ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Save className="w-5 h-5" />
+                  Save Social Media
+                </>
+              )}
             </button>
           </form>
         </div>
 
         {/* Change Password */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold text-black mb-6">Change Password</h2>
+          <h2 className="text-xl font-semibold text-black mb-4">Change Password</h2>
+          <p className="text-sm text-gray-600 mb-6">
+            Enter your new password below. You don't need to enter your current password since you're already logged in.
+          </p>
           
-          <form>
-            <div className="mb-4">
-              <label className="block text-gray-700 font-semibold mb-2">Current Password</label>
-              <input
-                type="password"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#FFD700]"
-              />
-            </div>
-
+          <form onSubmit={handleChangePassword}>
             <div className="mb-4">
               <label className="block text-gray-700 font-semibold mb-2">New Password</label>
               <input
                 type="password"
+                value={passwordData.newPassword}
+                onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#FFD700]"
+                placeholder="Minimum 6 characters"
+                required
               />
             </div>
 
@@ -209,15 +413,27 @@ const Settings = () => {
               <label className="block text-gray-700 font-semibold mb-2">Confirm New Password</label>
               <input
                 type="password"
+                value={passwordData.confirmPassword}
+                onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#FFD700]"
+                placeholder="Re-enter your new password"
+                required
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-black text-white font-semibold py-3 rounded hover:bg-gray-800 transition-all"
+              disabled={saving}
+              className="w-full bg-black text-white font-semibold py-3 rounded hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Update Password
+              {saving ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Updating...
+                </>
+              ) : (
+                'Update Password'
+              )}
             </button>
           </form>
         </div>

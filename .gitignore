@@ -10,9 +10,11 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
+Thumbs.db
 .env
 .env.local
 .env.development.local
@@ -26,6 +28,9 @@ yarn-error.log*
 # Packages
 package-lock.json
 
+# IDE
+.vscode/
+.idea/
 
 # pages
 EMAILJS_SETUP.md
@@ -38,3 +43,20 @@ SETUP_CHECKLIST.md
 START_HERE.md
 SUPABASE_QUICKSTART.md
 SUPABASE_SETUP.md
+ADMIN_DASHBOARD_UPDATE_SUMMARY.md
+ADMIN_PROJECTS_MANAGEMENT_GUIDE.md
+ADMIN_SETUP.md
+IMPLEMENTATION_CHECKLIST.md
+README_ADMIN_UPDATE.md
+SETTINGS_GUIDE.md
+SETUP_SUMMARY.md
+START_HERE_ADMIN_UPDATE.md
+SUPABASE_QUICK_SETUP.md
+SQL_QUICK_REFERENCE.sql
+SUPABASE_SQL_SCHEMA.sql
+database-schema.sql
+diagnose-settings-table.sql
+insert-settings-data.sql
+setup-admin.js
+simple-insert-settings.sql
+test-insert-socials.sql

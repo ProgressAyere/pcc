@@ -12,14 +12,14 @@ const AdminLogin = () => {
   const [error, setError] = useState('');
   const [showReset, setShowReset] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    const result = login(email, password);
+    const result = await login(email, password);
     if (result.success) {
       navigate('/admin/dashboard');
     } else {
-      setError(result.error);
+      setError(result.error || 'Login failed. Please check your credentials.');
     }
   };
 
@@ -107,10 +107,10 @@ const PasswordReset = ({ onBack }) => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleReset = (e) => {
+  const handleReset = async (e) => {
     e.preventDefault();
-    const result = resetPassword(email);
-    setMessage(result.message);
+    const result = await resetPassword(email);
+    setMessage(result.message || result.error);
   };
 
   return (

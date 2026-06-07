@@ -4,6 +4,7 @@ import { FaTiktok } from 'react-icons/fa';
 import { ContactSkeleton } from '../../components/skeleton/Skeleton';
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG, WHATSAPP_CONFIG } from '../../config/emailConfig';
+import { supabase } from '../../config/supabaseClient';
 
 const Contact = () => {
   const [loading, setLoading] = useState(true);
@@ -82,6 +83,25 @@ const Contact = () => {
       setSubmitStatus({ type: '', message: '' });
 
       try {
+        // Save to Supabase database first
+        const { error: dbError } = await supabase
+          .from('contact_submissions')
+          .insert({
+            name: formData.fullName,
+            email: formData.email,
+            phone: formData.phone,
+            subject: formData.projectType,
+            message: formData.message,
+            status: 'new'
+          });
+
+        if (dbError) {
+          console.error('Error saving to database:', dbError);
+          // Continue even if database save fails
+        } else {
+          console.log('✅ Contact submission saved to database');
+        }
+
         // Send email via EmailJS
         const templateParams = {
           from_name: formData.fullName,

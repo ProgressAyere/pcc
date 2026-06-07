@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { HomeSkeleton } from '../../components/skeleton/Skeleton';
+import { supabase } from '../../config/supabaseClient';
 import heroImage from '../../assets/constructions/construction-1.jpeg';
 import certImage from '../../assets/certification/certificate.png';
 import ceoImage from '../../assets/profile-images/profile1.jpeg';
@@ -112,10 +113,27 @@ const CounterCard = ({ end, suffix = '', label, delay = 0 }) => {
 const Home = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
-    return () => clearTimeout(timer);
+    const loadData = async () => {
+      try {
+        const { data } = await supabase
+          .from('testimonials')
+          .select('*')
+          .eq('status', 'approved')
+          .order('created_at', { ascending: false })
+          .limit(6);
+        
+        setTestimonials(data || []);
+      } catch (err) {
+        console.error('Error loading testimonials:', err);
+      } finally {
+        setTimeout(() => setLoading(false), 1500);
+      }
+    };
+    loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <HomeSkeleton />;
@@ -410,67 +428,32 @@ const Home = () => {
           </h2>
           <div className="w-24 h-1 bg-[#FFD700] mx-auto mb-8 sm:mb-12"></div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <motion.div 
-              className="bg-white p-6 sm:p-8 rounded-lg shadow-md"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: 0 }}
-            >
-              <div className="flex gap-1 mb-4">
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-              </div>
-              <p className="text-black text-sm sm:text-base mb-4 italic">
-                "PCC delivered beyond our expectations. The attention to detail and professionalism was outstanding."
-              </p>
-              <p className="text-black font-semibold">- Mr. Johnson O.</p>
-            </motion.div>
-
-            <motion.div 
-              className="bg-white p-6 sm:p-8 rounded-lg shadow-md"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="flex gap-1 mb-4">
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-              </div>
-              <p className="text-black text-sm sm:text-base mb-4 italic">
-                "From design to completion, PCC made our dream home a reality. Highly recommended!"
-              </p>
-              <p className="text-black font-semibold">- Mrs. Adeyemi T.</p>
-            </motion.div>
-
-            <motion.div 
-              className="bg-white p-6 sm:p-8 rounded-lg shadow-md"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="flex gap-1 mb-4">
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-                <Star className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
-              </div>
-              <p className="text-black text-sm sm:text-base mb-4 italic">
-                "Excellent service, quality work, and timely delivery. PCC is the best in the business."
-              </p>
-              <p className="text-black font-semibold">- Chief Okonkwo P.</p>
-            </motion.div>
-          </div>
+          {testimonials.length === 0 ? (
+            <p className="text-center text-gray-500 text-lg">No testimonials available yet.</p>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {testimonials.map((testimonial, index) => (
+                <motion.div 
+                  key={testimonial.id}
+                  className="bg-white p-6 sm:p-8 rounded-lg shadow-md"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                >
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="text-[#FFD700] w-6 h-6 fill-[#FFD700]" />
+                    ))}
+                  </div>
+                  <p className="text-black text-sm sm:text-base mb-4 italic">
+                    "{testimonial.content}"
+                  </p>
+                  <p className="text-black font-semibold">- {testimonial.client_name}</p>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

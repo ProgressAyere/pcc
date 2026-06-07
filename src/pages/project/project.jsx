@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, MapPin } from 'lucide-react';
 import { ProjectSkeleton } from '../../components/skeleton/Skeleton';
+import { supabase } from '../../config/supabaseClient';
 
 // Import images
 import design2bed from '../../assets/constructions/building-2bedroom-bungalow.jpeg';
@@ -524,16 +525,67 @@ const Project = () => {
   const [activeFilters, setActiveFilters] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [supabaseProjects, setSupabaseProjects] = useState([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
-    return () => clearTimeout(timer);
+    const loadProjects = async () => {
+      try {
+        console.log('🔄 Loading projects from Supabase...');
+        
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .order('display_order', { ascending: true });
+        
+        if (error) {
+          console.error('❌ Error loading projects:', error);
+          throw error;
+        }
+        
+        console.log('✅ Projects loaded successfully!');
+        console.log('📊 Total Supabase projects:', data?.length || 0);
+        console.log('📦 Supabase projects data:', data);
+        
+        // Transform Supabase data to match local project structure
+        const transformedProjects = (data || []).map(project => ({
+          id: `supabase-${project.id}`, // Add prefix to avoid ID conflicts
+          title: project.title,
+          category: project.category || [],
+          type: project.type,
+          image: project.main_image,
+          images: project.images || [project.main_image],
+          location: project.location,
+          description: project.description,
+          status: project.status,
+          video: project.video || null
+        }));
+        
+        console.log('📦 Transformed projects:', transformedProjects);
+        setSupabaseProjects(transformedProjects);
+      } catch (err) {
+        console.error('❌ Error in loadProjects:', err);
+      } finally {
+        setTimeout(() => setLoading(false), 1500);
+      }
+    };
+    
+    loadProjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <ProjectSkeleton />;
 
-  const designProjects = projects.filter(p => p.type === 'design');
-  const constructionProjects = projects.filter(p => p.type === 'construction');
+  // Combine hardcoded projects with Supabase projects
+  const allProjects = [...projects, ...supabaseProjects];
+  console.log('📊 Total combined projects:', allProjects.length);
+  console.log('📦 Hardcoded projects:', projects.length);
+  console.log('📦 Supabase projects:', supabaseProjects.length);
+
+  const designProjects = allProjects.filter(p => p.type === 'design');
+  const constructionProjects = allProjects.filter(p => p.type === 'construction');
+
+  console.log('🎨 Design projects:', designProjects.length);
+  console.log('🏗️ Construction projects:', constructionProjects.length);
 
   const currentProjects = activeTab === 'design' ? designProjects : constructionProjects;
 
@@ -542,6 +594,10 @@ const Project = () => {
     : currentProjects.filter((project) =>
         activeFilters.some((filter) => project.category.includes(filter))
       );
+
+  console.log('🔍 Active tab:', activeTab);
+  console.log('🔍 Active filters:', activeFilters);
+  console.log('🔍 Filtered projects count:', filteredProjects.length);
 
   return (
     <div className="bg-white min-h-screen pt-24 pb-16">
@@ -624,13 +680,16 @@ const Project = () => {
         <FilterBar activeFilters={activeFilters} onFilterChange={setActiveFilters} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProjects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              onClick={() => setSelectedProject(project)}
-            />
-          ))}
+          {filteredProjects.map((project) => {
+            console.log('🎴 Rendering project card:', project.title, '| Image:', project.image ? 'YES' : 'NO');
+            return (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onClick={() => setSelectedProject(project)}
+              />
+            );
+          })}
         </div>
 
         {filteredProjects.length === 0 && (
